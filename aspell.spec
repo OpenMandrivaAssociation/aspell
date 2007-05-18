@@ -2,7 +2,7 @@
 
 Name: aspell
 Version: 0.60.5
-Release: %mkrel 3
+Release: %mkrel 4
 Summary: A Free and Open Source interactive spelling checker program
 Group: Text tools
 Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.bz2
@@ -22,6 +22,9 @@ enhancements over Ispell such as using shared memory for dictionaries and
 intelligently handling personal dictionaries when more than one Aspell process 
 is open at once. 
 
+%pre
+[ -d %_libdir/aspell ] && rm -rf %_libdir/aspell
+
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc README TODO
@@ -32,6 +35,7 @@ is open at once.
 %{_bindir}/preunzip
 %{_bindir}/prezip
 %{_bindir}/prezip-bin
+%{_libdir}/aspell-0.60
 %{_libdir}/aspell
 %doc %{_datadir}/info/aspell*
 %doc %{_mandir}/man1/*.1*
@@ -99,15 +103,19 @@ spell checker.
 %setup -q
 
 %build
-%configure2_5x \
-    --enable-pkgdatadir=%_libdir/aspell \
-    --enable-pkglibdir=%_libdir/aspell
+%configure2_5x 
 
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%makeinstall_std
+rm -rf %buildroot
+
+make DESTDIR=%buildroot install
+
+# Provides symlink for configures that mean to match aspell on %%_libdir/aspell
+pushd %buildroot%_libdir
+    ln -sf aspell-0.60 aspell
+popd
 
 # multiarch policy
 %multiarch_binaries $RPM_BUILD_ROOT%{_bindir}/pspell-config
@@ -115,7 +123,8 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang %{name}
 
 
+
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %buildroot
 
 
