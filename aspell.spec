@@ -2,7 +2,7 @@
 
 Name: aspell
 Version: 0.60.5
-Release: %mkrel 4
+Release: %mkrel 5
 Summary: A Free and Open Source interactive spelling checker program
 Group: Text tools
 Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.bz2
@@ -23,7 +23,9 @@ intelligently handling personal dictionaries when more than one Aspell process
 is open at once. 
 
 %pre
-[ -d %_libdir/aspell ] && rm -rf %_libdir/aspell
+if [ -d %_libdir/aspell ]; then 
+    rm -rf %_libdir/aspell
+fi
 
 %files -f %{name}.lang
 %defattr(-,root,root)
