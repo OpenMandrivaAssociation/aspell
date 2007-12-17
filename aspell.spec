@@ -7,7 +7,6 @@ Summary: A Free and Open Source interactive spelling checker program
 Group: Text tools
 Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.bz2
 URL: http://aspell.net/
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 License: LGPL
 Requires: aspell-dictionary
 
