@@ -1,11 +1,11 @@
 %define lib_name %mklibname %{name} 15
 
 Name: aspell
-Version: 0.60.5
-Release: %mkrel 7
+Version: 0.60.6
+Release: %mkrel 1
 Summary: A Free and Open Source interactive spelling checker program
 Group: Text tools
-Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.bz2
+Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
 URL: http://aspell.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 License: LGPL
