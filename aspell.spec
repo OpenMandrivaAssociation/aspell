@@ -1,8 +1,10 @@
-%define lib_name %mklibname %{name} 15
+%define major	15
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
 Name: aspell
 Version: 0.60.6
-Release: %mkrel 2
+Release: %mkrel 3
 Summary: A Free and Open Source interactive spelling checker program
 Group: Text tools
 Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
@@ -44,40 +46,40 @@ fi
 
 #----------------------------------------------------------------------
 
-%package -n %{lib_name}
+%package -n %{libname}
 Group: Text tools
 Summary: Shared library files for aspell
 
-%description -n %{lib_name}
+%description -n %{libname}
 Shared library files for the aspell package.
 
 %if %mdkversion < 200900
-%post -n %{lib_name} -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
 %endif
 %if %mdkversion < 200900
-%postun -n %{lib_name} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 %endif
 
-%files -n %{lib_name}
+%files -n %{libname}
 %defattr(-, root, root)
-%{_libdir}/lib*.so.*
+%{_libdir}/lib*.so.%{major}*
 
 #----------------------------------------------------------------------
 
-%package -n %{lib_name}-devel
+%package -n %{develname}
 Group: Development/Other
 Summary: Development files for aspell
 Requires: %{name} = %{version}-%{release}
-Requires: %{lib_name} = %{version}-%{release}
+Requires: %{libname} = %{version}-%{release}
 Provides: libaspell-devel = %{version}-%{release}
-Provides: aspell-devel = %{version}-%{release}
-Obsoletes: aspell-devel
+Provides: %{name}-devel = %{version}-%{release}
+Obsoletes: %{libname}-devel
 Conflicts: libpspell4-devel
 
-%description -n %{lib_name}-devel
+%description -n %{develname}
 Development headers, and files for development from the aspell package.
 
-%files -n %{lib_name}-devel
+%files -n %{develname}
 %defattr(-, root, root)
 %{_bindir}/pspell-config
 %_includedir/*
