@@ -4,7 +4,7 @@
 
 Name: aspell
 Version: 0.60.6
-Release: %mkrel 4
+Release: %mkrel 5
 Summary: A Free and Open Source interactive spelling checker program
 Group: Text tools
 Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
