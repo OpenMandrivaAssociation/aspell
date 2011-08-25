@@ -3,8 +3,8 @@
 %define develname %mklibname %{name} -d
 
 Name: aspell
-Version: 0.60.6
-Release: %mkrel 9
+Version: 0.60.6.1
+Release: %mkrel 1
 Summary: A Free and Open Source interactive spelling checker program
 Group: Text tools
 Source0: ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
