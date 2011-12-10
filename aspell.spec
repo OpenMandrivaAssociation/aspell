@@ -5,13 +5,12 @@
 Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
 Version:	0.60.6.1
-Release:	%mkrel 1
+Release:	2
 Group:		Text tools
 License:	LGPL
 URL:		http://aspell.net/
 Source0:	ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
 Requires:	aspell-dictionary
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 GNU Aspell is a Free and Open Source spell checker designed to eventually 
@@ -34,8 +33,8 @@ Shared library files for the aspell package.
 %package -n %{develname}
 Summary:	Development files for aspell
 Group:		Development/Other
-Requires:	%{name} = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
+Requires:	%{libname} >= %{version}-%{release}
 Provides:	libaspell-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{libname}-devel < %{version}-%{release}
@@ -80,23 +79,15 @@ popd
 
 %find_lang %{name}
 
-%clean
-rm -rf %{buildroot}
+# cleanup
+rm -f %{buildroot}%{_libdir}/*.*a
 
 %pre
 if [ -d %{_libdir}/aspell ]; then 
     rm -rf %{_libdir}/aspell
 fi
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc README TODO
 %{_bindir}/aspell*
 %{_bindir}/run-with-aspell
@@ -111,18 +102,14 @@ fi
 %doc %{_mandir}/man1/*.1*
 
 %files -n %{libname}
-%defattr(-, root, root)
 %{_libdir}/lib*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-, root, root)
 %{_bindir}/pspell-config
 %{_includedir}/*
 %{_libdir}/libaspell.so
 %{_libdir}/libpspell.so
-%{_libdir}/lib*.la
 %{multiarch_bindir}/pspell-config
 
 %files manual
-%defattr(-, root, root)
 %doc manual/*
