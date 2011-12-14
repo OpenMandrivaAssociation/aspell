@@ -1,11 +1,12 @@
 %define major 15
 %define libname %mklibname %{name} %{major}
+%define libpspell %mklibname pspell %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
 Version:	0.60.6.1
-Release:	2
+Release:	3
 Group:		Text tools
 License:	LGPL
 URL:		http://aspell.net/
@@ -30,11 +31,19 @@ Group:		Text tools
 %description -n %{libname}
 Shared library files for the aspell package.
 
+%package -n %{libpspell}
+Summary:	Shared library files for aspell
+Group:		Text tools
+
+%description -n %{libpspell}
+Shared library files for the aspell package.
+
 %package -n %{develname}
 Summary:	Development files for aspell
 Group:		Development/Other
 Requires:	%{name} >= %{version}-%{release}
 Requires:	%{libname} >= %{version}-%{release}
+Requires:	%{libpspell} >= %{version}-%{release}
 Provides:	libaspell-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{libname}-devel < %{version}-%{release}
@@ -59,6 +68,7 @@ spell checker.
 
 %build
 %configure2_5x \
+	--disable-static \
 	--disable-rpath
 
 %make
@@ -80,7 +90,7 @@ popd
 %find_lang %{name}
 
 # cleanup
-rm -f %{buildroot}%{_libdir}/*.*a
+rm -f %{buildroot}%{_libdir}/*.la
 
 %pre
 if [ -d %{_libdir}/aspell ]; then 
@@ -102,7 +112,10 @@ fi
 %doc %{_mandir}/man1/*.1*
 
 %files -n %{libname}
-%{_libdir}/lib*.so.%{major}*
+%{_libdir}/libaspell.so.%{major}*
+
+%files -n %{libname}
+%{_libdir}/libpspell.so.%{major}*
 
 %files -n %{develname}
 %{_bindir}/pspell-config
