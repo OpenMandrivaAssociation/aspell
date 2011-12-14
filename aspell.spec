@@ -34,6 +34,7 @@ Shared library files for the aspell package.
 %package -n %{libpspell}
 Summary:	Shared library files for aspell
 Group:		Text tools
+Conflicts:	%{libname} < 0.60.6.1-3
 
 %description -n %{libpspell}
 Shared library files for the aspell package.
@@ -114,7 +115,7 @@ fi
 %files -n %{libname}
 %{_libdir}/libaspell.so.%{major}*
 
-%files -n %{libname}
+%files -n %{libpspell}
 %{_libdir}/libpspell.so.%{major}*
 
 %files -n %{develname}
