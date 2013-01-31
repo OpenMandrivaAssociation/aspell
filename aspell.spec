@@ -1,12 +1,12 @@
-%define major 15
-%define libname %mklibname %{name} %{major}
-%define libpspell %mklibname pspell %{major}
-%define develname %mklibname %{name} -d
+%define	major	15
+%define	libname	%mklibname %{name} %{major}
+%define	libpspell	%mklibname pspell %{major}
+%define	devname	%mklibname %{name} -d
 
 Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
 Version:	0.60.6.1
-Release:	3
+Release:	4
 Group:		Text tools
 License:	LGPL
 URL:		http://aspell.net/
@@ -24,22 +24,22 @@ enhancements over Ispell such as using shared memory for dictionaries and
 intelligently handling personal dictionaries when more than one Aspell process 
 is open at once.
 
-%package -n %{libname}
+%package -n	%{libname}
 Summary:	Shared library files for aspell
 Group:		Text tools
 
-%description -n %{libname}
+%description -n	%{libname}
 Shared library files for the aspell package.
 
-%package -n %{libpspell}
+%package -n	%{libpspell}
 Summary:	Shared library files for aspell
 Group:		Text tools
 Conflicts:	%{libname} < 0.60.6.1-3
 
-%description -n %{libpspell}
+%description -n	%{libpspell}
 Shared library files for the aspell package.
 
-%package -n %{develname}
+%package -n	%{devname}
 Summary:	Development files for aspell
 Group:		Development/Other
 Requires:	%{name} >= %{version}-%{release}
@@ -50,14 +50,14 @@ Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{libname}-devel < %{version}-%{release}
 Conflicts:	libpspell4-devel
 
-%description -n %{develname}
+%description -n	%{devname}
 Development headers, and files for development from the aspell package.
 
-%package manual
+%package	manual
 Summary:	Manual for aspell
 Group:		Text tools
 
-%description manual
+%description	manual
 This package contains a manual for aspell.
 
 GNU Aspell is a Free and Open Source spell checker designed to eventually 
@@ -75,23 +75,15 @@ spell checker.
 %make
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
-#make DESTDIR=%buildroot install
 
 # Provides symlink for configures that mean to match aspell on %%_libdir/aspell
-pushd %{buildroot}%{_libdir}
-    ln -sf aspell-0.60 aspell
-popd
+ln -sf aspell-0.60 %{buildroot}%{_libdir}/aspell
 
 # multiarch policy
 %multiarch_binaries %{buildroot}%{_bindir}/pspell-config
 
 %find_lang %{name}
-
-# cleanup
-rm -f %{buildroot}%{_libdir}/*.la
 
 %pre
 if [ -d %{_libdir}/aspell ]; then 
@@ -118,7 +110,7 @@ fi
 %files -n %{libpspell}
 %{_libdir}/libpspell.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %{_bindir}/pspell-config
 %{_includedir}/*
 %{_libdir}/libaspell.so
@@ -128,8 +120,10 @@ fi
 %files manual
 %doc manual/*
 
-
 %changelog
+* Thu Jan 31 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.60.6.1-4
+- cleanups
+
 * Wed Dec 14 2011 Matthew Dawkins <mattydaw@mandriva.org> 0.60.6.1-3
 + Revision: 741383
 - fixed pspell name
