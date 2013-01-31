@@ -44,7 +44,6 @@ Summary:	Development files for aspell
 Group:		Development/Other
 Requires:	%{libname} >= %{version}-%{release}
 Requires:	%{libpspell} >= %{version}-%{release}
-Provides:	libaspell-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{libname}-devel < %{version}-%{release}
 Conflicts:	libpspell4-devel
@@ -121,6 +120,7 @@ fi
 
 %changelog
 * Thu Jan 31 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.60.6.1-4
+- drop excessive provides
 - drop requires in -devel package on main package
 - cleanups
 
