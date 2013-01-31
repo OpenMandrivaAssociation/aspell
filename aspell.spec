@@ -11,7 +11,7 @@ Group:		Text tools
 License:	LGPL
 URL:		http://aspell.net/
 Source0:	ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
-Requires:	aspell-dictionary
+Suggests:	aspell-dictionary
 
 %description
 GNU Aspell is a Free and Open Source spell checker designed to eventually 
@@ -120,6 +120,7 @@ fi
 
 %changelog
 * Thu Jan 31 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.60.6.1-4
+- make dependency on aspell-dictionary soft to unbreak build dependency loop
 - drop excessive provides
 - drop requires in -devel package on main package
 - cleanups
