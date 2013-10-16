@@ -6,7 +6,7 @@
 Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
 Version:	0.60.6.1
-Release:	6
+Release:	7
 Group:		Text tools
 License:	LGPL
 Url:		http://aspell.net/
