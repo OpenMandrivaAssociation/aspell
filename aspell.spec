@@ -64,8 +64,9 @@ spell checker.
 %setup -q
 
 %build
-%configure2_5x \
-	--disable-static \
+export CC=gcc
+export CXX=g++
+%configure \
 	--disable-rpath
 
 %make
