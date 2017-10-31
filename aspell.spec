@@ -3,14 +3,21 @@
 %define	libpspell	%mklibname pspell %{major}
 %define	devname	%mklibname %{name} -d
 
+%define beta rc1
+
 Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
-Version:	0.60.6.1
-Release:	19
+Version:	0.60.7
+%if "%{beta}" != ""
+Release:	0.%{beta}.1
+Source0:	ftp://alpha.gnu.org/gnu/aspell/%{name}-%{version}-%{beta}.tar.gz
+%else
+Release:	1
+Source0:	ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
+%endif
 Group:		Text tools
 License:	LGPL
 Url:		http://aspell.net/
-Source0:	ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
 Suggests:	aspell-dictionary
 
 %description
@@ -61,11 +68,15 @@ replace Ispell. It can either be used as a library or as an independent
 spell checker. 
 
 %prep
+%if "%{beta}" != ""
+%setup -qn %{name}-%{version}-%{beta}
+%else
 %setup -q
+%endif
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 %configure \
 	--disable-rpath
 
@@ -76,9 +87,6 @@ export CXX=g++
 
 # Provides symlink for configures that mean to match aspell on %%_libdir/aspell
 ln -sf aspell-0.60 %{buildroot}%{_libdir}/aspell
-
-# multiarch policy
-%multiarch_binaries %{buildroot}%{_bindir}/pspell-config
 
 %find_lang %{name}
 
@@ -112,7 +120,6 @@ fi
 %{_includedir}/*
 %{_libdir}/libaspell.so
 %{_libdir}/libpspell.so
-%{multiarch_bindir}/pspell-config
 
 %files manual
 %doc manual/*
