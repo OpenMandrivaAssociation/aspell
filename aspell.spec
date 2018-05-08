@@ -9,7 +9,7 @@ Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
 Version:	0.60.7
 %if "%{beta}" != ""
-Release:	0.%{beta}.1
+Release:	0.%{beta}.2
 Source0:	ftp://alpha.gnu.org/gnu/aspell/%{name}-%{version}-%{beta}.tar.gz
 %else
 Release:	1
