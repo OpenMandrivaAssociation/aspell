@@ -3,7 +3,7 @@
 %define	libpspell	%mklibname pspell %{major}
 %define	devname	%mklibname %{name} -d
 
-%define beta rc1
+%define beta %{nil}
 
 Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
@@ -12,7 +12,7 @@ Version:	0.60.7
 Release:	0.%{beta}.2
 Source0:	ftp://alpha.gnu.org/gnu/aspell/%{name}-%{version}-%{beta}.tar.gz
 %else
-Release:	2
+Release:	1
 Source0:	ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
 %endif
 Group:		Text tools
@@ -69,21 +69,19 @@ spell checker.
 
 %prep
 %if "%{beta}" != ""
-%setup -qn %{name}-%{version}-%{beta}
+%autosetup -n %{name}-%{version}-%{beta} -p1
 %else
-%setup -q
+%autosetup -p1
 %endif
 
 %build
-#export CC=gcc
-#export CXX=g++
 %configure \
 	--disable-rpath
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 # Provides symlink for configures that mean to match aspell on %%_libdir/aspell
 ln -sf aspell-0.60 %{buildroot}%{_libdir}/aspell
