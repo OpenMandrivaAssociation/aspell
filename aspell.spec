@@ -1,13 +1,13 @@
-%define	major	15
-%define	libname	%mklibname %{name} %{major}
-%define	libpspell	%mklibname pspell %{major}
-%define	devname	%mklibname %{name} -d
+%define major 15
+%define libname %mklibname %{name} %{major}
+%define libpspell %mklibname pspell %{major}
+%define devname %mklibname %{name} -d
 
 %define beta %{nil}
 
 Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
-Version:	0.60.7
+Version:	0.60.8
 %if "%{beta}" != ""
 Release:	0.%{beta}.2
 Source0:	ftp://alpha.gnu.org/gnu/aspell/%{name}-%{version}-%{beta}.tar.gz
@@ -31,36 +31,36 @@ enhancements over Ispell such as using shared memory for dictionaries and
 intelligently handling personal dictionaries when more than one Aspell process 
 is open at once.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Shared library files for aspell
 Group:		Text tools
 
-%description -n	%{libname}
+%description -n %{libname}
 Shared library files for the aspell package.
 
-%package -n	%{libpspell}
+%package -n %{libpspell}
 Summary:	Shared library files for aspell
 Group:		Text tools
 Conflicts:	%{libname} < 0.60.6.1-3
 
-%description -n	%{libpspell}
+%description -n %{libpspell}
 Shared library files for the aspell package.
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Development files for aspell
 Group:		Development/Other
 Requires:	%{libname} >= %{version}-%{release}
 Requires:	%{libpspell} >= %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n	%{devname}
+%description -n %{devname}
 Development headers, and files for development from the aspell package.
 
-%package	manual
+%package manual
 Summary:	Manual for aspell
 Group:		Text tools
 
-%description	manual
+%description manual
 This package contains a manual for aspell.
 
 GNU Aspell is a Free and Open Source spell checker designed to eventually 
@@ -121,4 +121,3 @@ fi
 
 %files manual
 %doc manual/*
-
