@@ -12,7 +12,7 @@ Version:	0.60.8
 Release:	0.%{beta}.2
 Source0:	ftp://alpha.gnu.org/gnu/aspell/%{name}-%{version}-%{beta}.tar.gz
 %else
-Release:	2
+Release:	3
 Source0:	ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
 %endif
 Group:		Text tools
