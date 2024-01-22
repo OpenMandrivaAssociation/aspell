@@ -9,7 +9,7 @@ Summary:	A Free and Open Source interactive spelling checker program
 Name:		aspell
 Version:	0.60.8.1
 %if "%{beta}" != ""
-Release:	0.%{beta}1
+Release:	0.%{beta}.1
 Source0:	ftp://alpha.gnu.org/gnu/aspell/%{name}-%{version}-%{beta}.tar.gz
 %else
 Release:	1
@@ -19,6 +19,10 @@ Group:		Text tools
 License:	LGPL
 Url:		http://aspell.net/
 Suggests:	aspell-dictionary
+BuildRequires:	slibtool
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	make
 
 %description
 GNU Aspell is a Free and Open Source spell checker designed to eventually 
@@ -78,10 +82,10 @@ spell checker.
 %configure \
 	--disable-rpath
 
-%make_build
+%make_build LIBTOOL=slibtool-shared
 
 %install
-%make_install
+%make_install LIBTOOL=slibtool-shared
 
 # Provides symlink for configures that mean to match aspell on %%_libdir/aspell
 ln -sf aspell-0.60 %{buildroot}%{_libdir}/aspell
