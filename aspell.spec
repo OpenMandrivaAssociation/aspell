@@ -17,7 +17,7 @@ Source0:	ftp://ftp.gnu.org/gnu/aspell/%{name}-%{version}.tar.gz
 %endif
 Group:		Text tools
 License:	LGPL
-Url:		http://aspell.net/
+Url:		https://aspell.net/
 Suggests:	aspell-dictionary
 BuildRequires:	slibtool
 BuildRequires:	autoconf
