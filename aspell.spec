@@ -19,6 +19,7 @@ Group:		Text tools
 License:	LGPL
 Url:		https://aspell.net/
 Suggests:	aspell-dictionary
+BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	autoconf
 BuildRequires:	automake
